@@ -3,7 +3,7 @@
 @number = rand(@range)
 @list_responses = {"" => "sorry, what was that \n (A) Out of how many? (B) I typed out the number like a dumbass (C) No, I'm not going to guess",
                   "1" => "did you seriously just guess a number? why didn't you choose option B? dick.", "1*" => "whatever. The number was #{@number} now fuck off",
-                  "A" => "lots \n (A) Why? (B) Ok, I'm going to guess more (C) How many exactly?", "AA" => "fine its out of few now, happy?",
+                  "A" => "lots \n (A) Why? (B) Ok, I'm going to guess more (C) How many exactly?", "AA" => "fine its out of few now, happy? Guess a number.",
                   "AB" => "Good for you, its out of #{@range}. Goodluck", "AC" => "#{@range}, wanna change it? \n Y/N", "ACY" => "wimp, what do you want?",
                   "ACN" => "lol ok gl", "B" => "Well at least you're honest. The number is out of 100","C" => "Well you should probably play a diffrent game"}
 @key_list =""
@@ -25,8 +25,9 @@ def guessing(aware)
     sassing
   else
     loop do
+      @response = gets.chomp
       if @response.to_i == @number
-        p "holy fuck you did it good job"
+        p "you did it good job"
         sleep(10)
         p "what are you still doing here? go home"
       else
@@ -35,7 +36,6 @@ def guessing(aware)
         else
           p "na guess higher"
         end
-        @response = gets.chomp
       end
     end
   end
@@ -45,48 +45,52 @@ def sassing
   aware = false
   while (!aware)
     if (@key_list == "AB")
-      @range = 1000000
+      @range = 1000
       @number = rand(@range)
-      p @list_responses[@key_list]
+      puts @list_responses[@key_list]
       @response = gets.chomp
       aware = true
       guessing(aware)
     elsif (@key_list == "AC")
-      p @list_responses[@key_list]
+      puts @list_responses[@key_list]
       @response = gets.chomp
       @key_list += @response
       if (@key_list == "ACY")
-        p @list_responses[@key_list]
+        puts @list_responses[@key_list]
         @response = gets.chomp
-        @range = @resposne.to_i
+        # puts @response
+        @range = @response.to_i
         @number = rand(@range)
         aware = true
         guessing(aware)
       else
-        p @list_responses[@key_list]
-        @response = gets.chomp
-        @range = 5000
-        @number = rand(@range)
+        puts @list_responses[@key_list]
         aware = true
         guessing(aware)
       end
     elsif (@key_list == "B")
-      @range = 1000
+      @range = 100
       @number = rand(@range)
-      p @list_responses[@key_list]
+      puts @list_responses[@key_list]
+      aware = true
+      guessing(aware)
+    elsif (@key_list == "AA")
+      @range = 50
+      @number = rand(@range)
+      puts @list_responses[@key_list]
       aware = true
       guessing(aware)
     else
       # @range = 1000
       # @number = rand(@range)
-      p @list_responses[@key_list]
+      puts @list_responses[@key_list]
       @response = gets.chomp
       @key_list += @response
       sassing
     end
 
 
- p @list_responses[@key_list]
+ puts @list_responses[@key_list]
  @response = gets.chomp
  @key_list += response.strip.upcase
 
